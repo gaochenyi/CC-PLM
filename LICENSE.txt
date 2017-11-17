@@ -1,0 +1,21 @@
+Copyright (c) 2017 Chen-Yi Gao
+
+The license of CC-PLM is AGPLv3 supplemented by a condition about citation.
+The license notice is as follows:
+
+This program is licensed to you under version 3 of the GNU Affero General Public
+License, along with the additional condition in the following paragraph.
+
+The publication of research using this program, whether in whole or in part and
+whether modified or not, must include appropriate citation to:
+
+    Chen-Yi Gao, Hai-Jun Zhou, and Erik Aurell,
+    Correlation-Compressed Direct-Coupling Analysis,
+    Phys. Rev. E 98, 032407.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License along
+with this program.  If not, see <https://www.gnu.org/licenses/>.
