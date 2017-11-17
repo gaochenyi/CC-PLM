@@ -1,0 +1,3 @@
+fprintf('Compiling `g_r_mex_v2.cpp` ...\n')
+mex -silent -largeArrayDims CXXFLAGS='$CXXFLAGS -std=c++11' ...
+  -outdir ../compiled g_r_mex_v2.cpp
