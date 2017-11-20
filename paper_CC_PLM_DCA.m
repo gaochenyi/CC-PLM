@@ -91,30 +91,16 @@ save(filename_CC_full, 'MSA_cc', 'idx_cc')
 
 %% PLM
 S = uint8(MSA_cc.'-1);
-lambdas = [lambda lambda/2];
-skipCheck = false;
 
-% see `minFunc.m` for details
-options.Display = 'off';    % 'off' to not display progress information
-options.useMEX  = true;     % Tests show that MEX boosts by 15%
-options.progTol = -1;       % stop only when 1st-order optimality reaches (controlled by `optTol`)
-options.optTol  = 1e-5;     % smaller optTol -> closer to optimal point, but more iterations
-% L-BFGS (2nd-order method)
-options.Method  = 'lbfgs';
-% number of corrections to store in memory, used to construct an approximation
-% of Hessian, more corrections result in faster convergence but use more memory
-options.Corr    = 100;      % (default: 100)
 
-table_i_j_score = PLM_DCA_verbose(...
-  S,N_cc,B_cc,q,weights,lambdas,skipCheck,options,numWorker);
+table_i_j_score = PLM_DCA(S,N_cc,B_cc,q,weights,lambda,numWorker);
 
 % position in MSA_cc -> pos in MSA_f -> pos in original MSA (1-based)
 table_i_j_score(1:2,:) = idx_f(idx_cc(table_i_j_score(1:2,:)));
 
 
 %% save to file
-DCA_id = sprintf('%s--PLM-l_%g-opt_%g-prog_%g', ...
-  CC_id,lambda, options.optTol, options.progTol);
+DCA_id = sprintf('%s--PLM-l_%g',CC_id,lambda);
 
 filename_score = sprintf('%s--%s.mat', MSA_id, DCA_id);
 filename_score_full = fullfile(outputPath, filename_score);
@@ -123,7 +109,7 @@ fprintf('Saving to file ...\n')
 tic
 save(filename_score_full, 'table_i_j_score', '-v7.3');
 time_save = toc;
-fprintf('\tFinished in %.2f s\n', time_save);
+fprintf('\tFinished in %.2f s.\n', time_save);
 
 
 end
