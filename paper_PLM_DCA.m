@@ -1,10 +1,8 @@
 % The customized version to produce results in our paper
 
-function paper_PLM_DCA(...
-  fastafile,dataID,lambda, ...
-  outputPath,NoLoad, ...
-  optTolOld,optTolNew,PLM_out_path,numWorker)
-
+% function paper_PLM_DCA(fastafile,dataID,lambda, outputPath,NoLoad, optTolOld,optTolNew,PLM_out_path,numWorker)
+function paper_PLM_DCA(fastafile,dataID, outputPath,NoLoad, numWorker, ...
+  lambda, optTolOld,optTolNew,PLM_out_path)
 
 %% check with little overhead
 
@@ -12,19 +10,20 @@ function paper_PLM_DCA(...
 if ~ischar(dataID)
   error('`dataID` should be provided as a char vector.')
 end
+
 % lambda
 if lambda < 0.0
   error('lambda should be non-negative.')
 end
 
+% check paths
+checkPath(outputPath)
+checkPath(PLM_out_path)
+
 % NoLoad
 if ~islogical(NoLoad)
   error('`NoLoad` should be provided as logical.')
 end
-
-% check paths
-checkPath(outputPath)
-checkPath(PLM_out_path)
 
 % optTol
 if optTolNew <= 0
@@ -64,7 +63,6 @@ else
   load(filename_filter_full, 'MSA_f', 'idx_f');
 end
 
-
 % remove duplicate samples
 MSA_f_unique = unique(MSA_f,'rows');
 
@@ -95,8 +93,9 @@ fprintf('Saving to file ...\n')
 tic
 save(filename_score_full, 'table_i_j_score', '-v7.3');
 time_save = toc;
-fprintf('\tFinished in %.2f s\n', time_save);
+fprintf('\tFinished in %.2f s.\n', time_save);
 
+fprintf('Full path to the output file is \n\n\t%s\n\n',filename_score_full)
 
 end
 

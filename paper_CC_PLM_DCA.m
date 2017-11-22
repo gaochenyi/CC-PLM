@@ -10,8 +10,9 @@
 % `outputPath`  checked here
 % `NoLoad`      checked here
 
-function paper_CC_PLM_DCA(fastafile, dataID, num_MI, lambda, ...
-  numWorker, outputPath, NoLoad)
+% function paper_CC_PLM_DCA(fastafile,dataID, num_MI,lambda, numWorker, outputPath, NoLoad)
+function paper_CC_PLM_DCA(fastafile,dataID, outputPath,NoLoad, numWorker, ...
+  num_MI,lambda)
 
 
 %% check with little overhead
@@ -40,14 +41,15 @@ if ~islogical(NoLoad)
 end
 
 
-%% If no pool exists, a new one is created.
+%% some preparation
+
+% If no pool exists, a new one is created.
 poolobj = gcp('nocreate');
 if isempty(poolobj)
   parpool(numWorker);
 end
 
-
-%% search path
+% search path
 addpath(genpath(pwd))
 
 
@@ -69,7 +71,7 @@ else
   load(filename_filter_full, 'MSA_f', 'idx_f');
 end
 
-% remove duplicate samples 
+% remove duplicate samples
 MSA_f_unique = unique(MSA_f,'rows');
 
 % MSA info
@@ -90,8 +92,9 @@ save(filename_CC_full, 'MSA_cc', 'idx_cc')
 
 
 %% PLM
-S = uint8(MSA_cc.'-1);
+DCA_id = sprintf('%s--PLM-l_%g',CC_id,lambda);
 
+S = uint8(MSA_cc.'-1);
 
 table_i_j_score = PLM_DCA(S,N_cc,B_cc,q,weights,lambda,numWorker);
 
@@ -100,7 +103,6 @@ table_i_j_score(1:2,:) = idx_f(idx_cc(table_i_j_score(1:2,:)));
 
 
 %% save to file
-DCA_id = sprintf('%s--PLM-l_%g',CC_id,lambda);
 
 filename_score = sprintf('%s--%s.mat', MSA_id, DCA_id);
 filename_score_full = fullfile(outputPath, filename_score);
@@ -111,5 +113,6 @@ save(filename_score_full, 'table_i_j_score', '-v7.3');
 time_save = toc;
 fprintf('\tFinished in %.2f s.\n', time_save);
 
+fprintf('Full path to the output file is \n\n\t%s\n\n',filename_score_full)
 
 end
