@@ -17,7 +17,7 @@ addpath(genpath(pwd))
 %% PLM
 % see `minFunc.m` for details
 options.Display = 'off';    % 'off' to not display progress information
-options.progTol = -1;       % stop only when 1st-order optimality reaches (controlled by `optTol`)
+options.progTol = -0;       % stop only when 1st-order optimality reaches (controlled by `optTol`)
 options.optTol  = 1e-5;     % smaller optTol -> closer to optimal point, but more iterations
 options.useMEX  = true;     % Tests show that MEX boosts by 15% for N~8e4, B~3e3
 options.Method  = 'lbfgs';  % L-BFGS (2nd-order method)
