@@ -80,7 +80,7 @@ By setting `optTolOld` equal to `optTolNew`, one can resume previous partial run
 
 By setting `optTolOld = 1e-3` and `optTolNew = 1e-5`, one make Potts parameters got with `1e-3` further optimal and make those parameters meet the stricter condition of optimality associated with `1e-5`.
 
-FYI, It takes 14 days with `1e-3` on a 81506-loci system. It is estimated to take 10 more days to reach the stricter condition associated with `1e-5`.
+FYI, It takes 14 days with `1e-3` on a 56-core server for an 81506-loci system. It is estimated to take 10 more days to reach the stricter condition associated with `1e-5`.
 
 Check the comment embedded in `PLM_DCA_file.m` for details.
 
