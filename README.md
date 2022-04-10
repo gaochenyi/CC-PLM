@@ -1,17 +1,17 @@
 # CC-PLM #
 
-In each directory, there is a `REAMD.md` concerning files therein. Please check them for details.
+In each directory, there is a `README.md` concerning files therein. Please check them for details.
 
 CC-PLM is a pilot version of correlation-compressed direct coupling analysis (CC-DCA) with the DCA flavour being PLM. All its components were revised to be user-friendly, however, there may be some ambiguities. Please let me know if any exists.
 
 CC-PLM contains an optimized implementation of PLM for DCA (in directory `PLM-DCA`).
 
-CC-PLM was developed as a part of an academic project. If possible, please cite the following paper:
+CC-PLM/PLM-DCA was developed as a part of an academic project.
+**If you use CC-PLM/PLM-DCA (whether in whole or in part and whether modified or as is) for your own research, cite the following paper:**
 
-  - [Chen-Yi Gao, Hai-Jun Zhou and Erik Aurell. Correlation-compressed Direct Coupling Analysis. arXiv:1710.04819][our paper]
+- [Chen-Yi Gao, Hai-Jun Zhou and Erik Aurell, Correlation-Compressed Direct-Coupling Analysis, Phys. Rev. E 98, 032407.][link]
 
-[our paper]: https://arxiv.org/abs/1710.04819
-
+[link]: https://doi.org/10.1103/PhysRevE.98.032407
 
 # How to reproduce our results? #
 
@@ -76,11 +76,12 @@ These two `paper_*` functions are just for demonstration and reproduction of our
 
 `optTolNew` is the parameter for optimality of optimization involved in PLM.
 
-By setting `optTolOld` equal to `optTolNew`, one can resume previous partial run. For the first run, previous partial run is empty.
+By setting `optTolOld` equal to `optTolNew`, one can resume previous partial run.
+For the first run, previous partial run is empty.
 
-By setting `optTolOld = 1e-3` and `optTolNew = 1e-5`, one make Potts parameters got with `1e-3` further optimal and make those parameters meet the stricter condition of optimality associated with `1e-5`.
+By setting `optTolOld = 1e-3` and `optTolNew = 1e-5`, one continues to optimize Potts parameters---this program tries to fetch Potts parameters from files, if any, associated with `1e-3`, and then continues the optimization with the stricter condition of optimality associated with `1e-5`.
 
-FYI, It takes 14 days with `1e-3` on a 56-core server for an 81506-loci system. It is estimated to take 10 more days to reach the stricter condition associated with `1e-5`.
+FYI, it takes 14 days with `1e-3` on a 56-core server for an 81506-loci system.
+It is estimated to take 10 more days to reach the stricter condition associated with `1e-5`.
 
 Check the comment embedded in `PLM_DCA_file.m` for details.
-

@@ -7,9 +7,9 @@
 % DESCRIPTION
 % ===
 % This function implements the 'Correlation Compression (CC)' procedure
-% introduced in
-% [Chen-Yi Gao, Hai-Jun Zhou, Erik Aurell]
-% (https://arxiv.org/abs/1710.04819)
+% introduced in [a paper by C.-Y. Gao, H.-J. Zhou, and E. Aurell][link]
+%
+% [link]: https://doi.org/10.1103/PhysRevE.98.032407
 %
 % INPUT
 % ===
@@ -60,7 +60,7 @@ if ~isa(weights, 'double') || ~isreal(weights)
 end
 [s1,s2] = size(weights);
 if s1*s2 ~= num_seq || (s1 ~= 1 && s2 ~= 1)
-  error('Weights for samples should provided as a 1D array.')
+  error('Weights for samples should be provided as a 1D array.')
 end
 
 % outputPath
